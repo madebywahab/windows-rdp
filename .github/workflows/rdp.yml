@@ -1,16 +1,18 @@
 name: Windows RDP
 
-on: workflow_dispatch
+on:
+  workflow_dispatch:
 
 jobs:
   build:
     runs-on: windows-latest
     steps:
-    - name: Enable RDP
-      run: |
-        net user runneradmin Password123!
-        net localgroup administrators runneradmin /add
+
+    - name: Set Password
+      run: net user runneradmin Password123!
+
+    - name: Show IP
+      run: ipconfig
+
     - name: Keep Alive
-      run: |
-        echo "RDP Ready"
-        timeout 21600
+      run: timeout 21600
